@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sully's Marina Lounge | Hark! Cocktails | The Marina, San Francisco</title>
+  <meta name="description" content="Sully's Marina Lounge - Your neighborhood dive bar in San Francisco's Marina District since [year]. Open daily 12PM-2AM. Hark! Cocktails.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --neon-red: #FF3D00;
+      --neon-yellow: #FFD700;
+      --neon-green: #00FF9F;
+      --deep-red: #8B0000;
+      --dark-bg: #1a0a0a;
+      --light-cream: #FFF8DC;
+    }
+    
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: var(--dark-bg);
+      color: var(--light-cream);
+      line-height: 1.6;
+    }
+    
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background: url('IMG_5054.jpg') center/cover no-repeat;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+    }
+    
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-shadow: 
+        0 0 10px var(--neon-red),
+        0 0 20px var(--neon-red),
+        0 0 30px var(--neon-red),
+        0 0 40px var(--neon-red);
+      margin-bottom: 1rem;
+      color: var(--neon-yellow);
+    }
+    
+    .hero .tagline {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-style: italic;
+      color: var(--neon-green);
+      text-shadow: 
+        0 0 10px var(--neon-green),
+        0 0 20px var(--neon-green);
+      margin-bottom: 2rem;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: var(--neon-red);
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border: 3px solid var(--neon-yellow);
+      box-shadow: 
+        0 0 10px var(--neon-red),
+        0 0 20px var(--neon-red);
+      transition: all 0.3s ease;
+    }
+    
+    .cta-button:hover {
+      background: var(--neon-yellow);
+      color: var(--dark-bg);
+      border-color: var(--neon-red);
+      transform: translateY(-3px);
+      box-shadow: 
+        0 0 20px var(--neon-yellow),
+        0 5px 15px rgba(0,0,0,0.3);
+    }
+    
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(26, 10, 10, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      z-index: 100;
+      border-bottom: 2px solid var(--neon-red);
+    }
+    
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    nav a {
+      color: var(--light-cream);
+      text-decoration: none;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+    
+    nav a:hover {
+      color: var(--neon-green);
+      text-shadow: 0 0 10px var(--neon-green);
+    }
+    
+    /* Sections */
+    section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    section h2 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 2rem;
+      text-align: center;
+      color: var(--neon-yellow);
+      text-shadow: 0 0 10px var(--neon-yellow);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    section p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      color: var(--light-cream);
+    }
+    
+    /* About Section */
+    .about {
+      background: linear-gradient(135deg, rgba(139, 0, 0, 0.3) 0%, rgba(26, 10, 10, 0.8) 100%);
+      border-top: 3px solid var(--neon-red);
+      border-bottom: 3px solid var(--neon-green);
+    }
+    
+    /* Hours & Location */
+    .location {
+      background: var(--dark-bg);
+    }
+    
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    
+    .info-box {
+      background: rgba(139, 0, 0, 0.2);
+      padding: 2rem;
+      border: 2px solid var(--neon-red);
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(255, 61, 0, 0.3);
+    }
+    
+    .info-box h3 {
+      color: var(--neon-green);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 10px var(--neon-green);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .info-box p {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .info-box a {
+      color: var(--neon-yellow);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .info-box a:hover {
+      color: var(--neon-green);
+      text-shadow: 0 0 10px var(--neon-green);
+    }
+    
+    /* Map */
+    .map-container {
+      margin-top: 3rem;
+      border: 3px solid var(--neon-red);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(255, 61, 0, 0.4);
+    }
+    
+    .map-container iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      filter: grayscale(20%) contrast(1.2);
+    }
+    
+    /* Merch Section */
+    .merch {
+      background: linear-gradient(135deg, rgba(0, 255, 159, 0.1) 0%, rgba(26, 10, 10, 0.8) 100%);
+      border-top: 3px solid var(--neon-green);
+      text-align: center;
+    }
+    
+    .merch-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 1.5rem 3rem;
+      background: var(--neon-green);
+      color: var(--dark-bg);
+      text-decoration: none;
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border: 3px solid var(--neon-yellow);
+      box-shadow: 
+        0 0 20px var(--neon-green),
+        0 5px 15px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .merch-button:hover {
+      background: var(--neon-yellow);
+      border-color: var(--neon-green);
+      transform: translateY(-3px);
+      box-shadow: 
+        0 0 30px var(--neon-yellow),
+        0 8px 20px rgba(0,0,0,0.4);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--dark-bg);
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 3px solid var(--neon-red);
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .social-links a {
+      color: var(--light-cream);
+      font-size: 2rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .social-links a:hover {
+      color: var(--neon-green);
+      text-shadow: 0 0 15px var(--neon-green);
+      transform: scale(1.2);
+    }
+    
+    footer p {
+      color: var(--light-cream);
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+    
+    /* Scroll Down Indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--neon-green);
+      font-size: 2rem;
+      animation: bounce 2s infinite;
+      text-shadow: 0 0 10px var(--neon-green);
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      40% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+      60% {
+        transform: translateX(-50%) translateY(-5px);
+      }
+    }
+    
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      nav ul {
+        gap: 1rem;
+      }
+      
+      nav a {
+        font-size: 0.8rem;
+      }
+      
+      section {
+        padding: 3rem 1.5rem;
+      }
+      
+      .info-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#location">Location</a></li>
+      <li><a href="#merch">Merch</a></li>
+    </ul>
+  </nav>
+  
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Sully's Marina Lounge</h1>
+      <p class="tagline">Hark! Cocktails</p>
+      <a href="#location" class="cta-button">Visit Us</a>
+    </div>
+    <div class="scroll-indicator">↓</div>
+  </section>
+  
+  <!-- About Section -->
+  <section id="about" class="about">
+    <h2>Your Neighborhood Dive</h2>
+    <p>
+      Since [YEAR], Sully's Marina Lounge has been the Marina District's favorite watering hole. With our iconic neon sign lighting up Chestnut Street, we've served generations of San Franciscans looking for cold drinks, good company, and zero pretense.
+    </p>
+    <p>
+      This is where neighbors become friends, where stories are told over whiskey, and where the jukebox never stops. We're not fancy—we're authentic. And that's exactly how we like it.
+    </p>
+    <p>
+      Come for the drinks. Stay for the atmosphere. Leave as family.
+    </p>
+  </section>
+  
+  <!-- Location & Hours -->
+  <section id="location" class="location">
+    <h2>Find Us</h2>
+    
+    <div class="info-grid">
+      <div class="info-box">
+        <h3>Hours</h3>
+        <p><strong>Every Day:</strong></p>
+        <p>12:00 PM – 2:00 AM</p>
+      </div>
+      
+      <div class="info-box">
+        <h3>Location</h3>
+        <p>2138 Chestnut Street</p>
+        <p>San Francisco, CA 94123</p>
+        <p>The Marina District</p>
+        <p><a href="https://maps.google.com/?q=2138+Chestnut+Street+San+Francisco+CA+94123" target="_blank">Get Directions →</a></p>
+      </div>
+      
+      <div class="info-box">
+        <h3>Contact</h3>
+        <p><strong>Phone:</strong> <a href="tel:+14155551234">(415) 555-1234</a></p>
+        <p><strong>Email:</strong> <a href="mailto:hello@sullysmarinaluounge.com">hello@sullysmarinaluounge.com</a></p>
+      </div>
+    </div>
+    
+    <div class="map-container">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3152.2977893229234!2d-122.44186368468184!3d37.79930797975743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808580e8c8a8f8f7%3A0x1234567890abcdef!2s2138%20Chestnut%20St%2C%20San%20Francisco%2C%20CA%2094123!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" 
+        allowfullscreen="" 
+        loading="lazy">
+      </iframe>
+    </div>
+  </section>
+  
+  <!-- Merch Section -->
+  <section id="merch" class="merch">
+    <h2>Sully's Swag</h2>
+    <p>
+      Rep your favorite dive bar. T-shirts, hats, pint glasses, and more. 
+      All featuring that iconic neon sign you know and love.
+    </p>
+    <!-- TODO: Replace with actual Shopify store URL -->
+    <a href="https://your-shopify-store.com" target="_blank" class="merch-button">Shop Merch</a>
+  </section>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="social-links">
+      <!-- TODO: Replace # with actual social media URLs -->
+      <a href="#" target="_blank" title="Instagram">📷</a>
+      <a href="#" target="_blank" title="Facebook">👍</a>
+      <a href="#" target="_blank" title="Twitter">🐦</a>
+    </div>
+    <p>&copy; 2025 Sully's Marina Lounge. All rights reserved.</p>
+    <p>2138 Chestnut Street, San Francisco, CA 94123</p>
+  </footer>
+  
+  <script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
