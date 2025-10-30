@@ -1,459 +1,520 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sully's Marina Lounge | Hark! Cocktails | The Marina, San Francisco</title>
-  <meta name="description" content="Sully's Marina Lounge - Your neighborhood dive bar in San Francisco's Marina District since [year]. Open daily 12PM-2AM. Hark! Cocktails.">
+  <meta name="description" content="Sully's Marina Lounge — your neighborhood dive in San Francisco's Marina District. Open daily 12PM–2AM. Hark! Cocktails." />
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* ---------- Base & Theme ---------- */
+    :root{
+      --bg:#120c0c;
+      --bg-soft:#1b1111;
+      --text:#f6efe1;
+      --muted:#cfc6b1;
+      --accent:#ffd86b;   /* warm neon yellow */
+      --accent-2:#23f3a3; /* soft neon green */
+      --accent-3:#ff5a3d; /* soft neon red */
+      --card:rgba(255,255,255,0.04);
+      --border:rgba(255,255,255,0.08);
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:14px;
+      --font:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, system-ui, "Apple Color Emoji","Segoe UI Emoji";
     }
-    
-    :root {
-      --neon-red: #FF3D00;
-      --neon-yellow: #FFD700;
-      --neon-green: #00FF9F;
-      --deep-red: #8B0000;
-      --dark-bg: #1a0a0a;
-      --light-cream: #FFF8DC;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;background:var(--bg);color:var(--text);
+      font-family:var(--font);line-height:1.5;-webkit-font-smoothing:antialiased;scroll-behavior:smooth;
     }
-    
-    body {
-      font-family: 'Georgia', 'Times New Roman', serif;
-      background: var(--dark-bg);
-      color: var(--light-cream);
-      line-height: 1.6;
+    img{max-width:100%;display:block}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* ---------- Layout ---------- */
+    .container{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}
+    .stack{display:grid;gap:28px}
+    .row{display:grid;grid-template-columns:1fr;gap:28px}
+    @media(min-width:860px){.row{grid-template-columns:1fr 1fr}}
+
+    /* ---------- Top Nav ---------- */
+    .nav{
+      position:sticky;top:0;z-index:1000;backdrop-filter:saturate(1.2) blur(8px);
+      background:rgba(18,12,12,.7);border-bottom:1px solid var(--border);
     }
-    
-    /* Hero Section */
-    .hero {
-      height: 100vh;
-      background: url('IMG_5054.jpg') center/cover no-repeat;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+    .nav .inner{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{font-weight:800;letter-spacing:.3px}
+    .brand .tiny{display:block;font-weight:600;font-size:11px;color:var(--muted);letter-spacing:.6px}
+    .nav a.button{display:inline-flex;gap:10px;align-items:center;
+      padding:10px 14px;border:1px solid var(--border);border-radius:12px;background:var(--card)}
+    .links{display:flex;gap:18px;align-items:center}
+    .links a{font-weight:600;color:var(--text);opacity:.9}
+    .links a:hover{opacity:1}
+    .links .shop-btn{
+      background:linear-gradient(135deg, rgba(255,216,107,.15), rgba(255,216,107,.08));
+      border:1px solid rgba(255,216,107,.3);
+      padding:6px 12px;
+      border-radius:8px;
+      color:var(--accent);
+      transition:all 0.2s ease;
     }
-    
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+    .links .shop-btn:hover{
+      background:linear-gradient(135deg, rgba(255,216,107,.25), rgba(255,216,107,.15));
+      transform:translateY(-1px);
+      text-decoration:none;
     }
-    
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      padding: 2rem;
+
+    /* ---------- Hero ---------- */
+    .hero{
+      position:relative;min-height:78vh;display:grid;place-items:center;overflow:hidden;
+      border-bottom:1px solid var(--border);
     }
-    
-    .hero h1 {
-      font-size: clamp(3rem, 8vw, 6rem);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      text-shadow: 
-        0 0 10px var(--neon-red),
-        0 0 20px var(--neon-red),
-        0 0 30px var(--neon-red),
-        0 0 40px var(--neon-red);
-      margin-bottom: 1rem;
-      color: var(--neon-yellow);
+    .hero::before{
+      content:"";position:absolute;inset:0;
+      background:radial-gradient(1200px 600px at 10% 10%, rgba(255,90,61,.12), transparent 60%),
+                 radial-gradient(900px 500px at 90% 90%, rgba(35,243,163,.10), transparent 60%);
+      pointer-events:none;
     }
-    
-    .hero .tagline {
-      font-size: clamp(1.5rem, 4vw, 2.5rem);
-      font-style: italic;
-      color: var(--neon-green);
-      text-shadow: 
-        0 0 10px var(--neon-green),
-        0 0 20px var(--neon-green);
-      margin-bottom: 2rem;
+    .hero-media{
+      position:absolute;inset:0;opacity:.28;background:#000 url('IMG_5054.jpg') center/cover no-repeat;
+      filter:saturate(0.9) contrast(1.05) brightness(.9);
     }
-    
-    .cta-button {
-      display: inline-block;
-      padding: 1rem 2.5rem;
-      background: var(--neon-red);
-      color: white;
-      text-decoration: none;
-      font-size: 1.2rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      border: 3px solid var(--neon-yellow);
-      box-shadow: 
-        0 0 10px var(--neon-red),
-        0 0 20px var(--neon-red);
-      transition: all 0.3s ease;
+    .hero .panel{
+      position:relative;z-index:2;background:rgba(27,17,17,.72);
+      border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;box-shadow:var(--shadow);
+      max-width:720px
     }
-    
-    .cta-button:hover {
-      background: var(--neon-yellow);
-      color: var(--dark-bg);
-      border-color: var(--neon-red);
-      transform: translateY(-3px);
-      box-shadow: 
-        0 0 20px var(--neon-yellow),
-        0 5px 15px rgba(0,0,0,0.3);
-    }
-    
-    /* Navigation */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(26, 10, 10, 0.95);
-      backdrop-filter: blur(10px);
-      padding: 1rem 2rem;
-      z-index: 100;
-      border-bottom: 2px solid var(--neon-red);
-    }
-    
-    nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    
-    nav a {
-      color: var(--light-cream);
-      text-decoration: none;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-    }
-    
-    nav a:hover {
-      color: var(--neon-green);
-      text-shadow: 0 0 10px var(--neon-green);
-    }
-    
-    /* Sections */
-    section {
-      padding: 5rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    section h2 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      margin-bottom: 2rem;
-      text-align: center;
-      color: var(--neon-yellow);
-      text-shadow: 0 0 10px var(--neon-yellow);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    
-    section p {
-      font-size: 1.2rem;
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-      color: var(--light-cream);
-    }
-    
-    /* About Section */
-    .about {
-      background: linear-gradient(135deg, rgba(139, 0, 0, 0.3) 0%, rgba(26, 10, 10, 0.8) 100%);
-      border-top: 3px solid var(--neon-red);
-      border-bottom: 3px solid var(--neon-green);
-    }
-    
+    h1{margin:0 0 8px;font-size:clamp(32px,6vw,56px);line-height:1.05;font-weight:900;letter-spacing:.2px}
+    .tag{font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--accent)}
+    .lede{margin-top:10px;color:var(--muted);font-size:18px}
+
+    .cta{display:inline-flex;align-items:center;gap:10px;margin-top:18px;
+      background:linear-gradient(180deg,var(--accent),#ffcc4d);color:#1a120f;
+      padding:12px 16px;border-radius:12px;font-weight:800;border:0;box-shadow:0 10px 22px rgba(255,216,107,.15)}
+    .cta:hover{transform:translateY(-1px);box-shadow:0 14px 28px rgba(255,216,107,.20)}
+
+    /* ---------- Sections ---------- */
+    section{padding:64px 0}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+    h2{font-size:clamp(26px,4vw,38px);margin:0 0 8px}
+    .sub{color:var(--muted);margin:0 0 18px}
+
+    /* About visual */
+    .about-img{border-radius:var(--radius);border:1px solid var(--border);overflow:hidden}
+    .about-img img{aspect-ratio:4/3;object-fit:cover;}
+
     /* Hours & Location */
-    .location {
-      background: var(--dark-bg);
-    }
-    
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 3rem;
-      margin-top: 3rem;
-    }
-    
-    .info-box {
-      background: rgba(139, 0, 0, 0.2);
-      padding: 2rem;
-      border: 2px solid var(--neon-red);
-      border-radius: 8px;
-      box-shadow: 0 0 20px rgba(255, 61, 0, 0.3);
-    }
-    
-    .info-box h3 {
-      color: var(--neon-green);
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 10px var(--neon-green);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    
-    .info-box p {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
-    
-    .info-box a {
-      color: var(--neon-yellow);
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-    
-    .info-box a:hover {
-      color: var(--neon-green);
-      text-shadow: 0 0 10px var(--neon-green);
-    }
-    
-    /* Map */
-    .map-container {
-      margin-top: 3rem;
-      border: 3px solid var(--neon-red);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 0 30px rgba(255, 61, 0, 0.4);
-    }
-    
-    .map-container iframe {
-      width: 100%;
-      height: 400px;
-      border: none;
-      filter: grayscale(20%) contrast(1.2);
-    }
-    
-    /* Merch Section */
-    .merch {
-      background: linear-gradient(135deg, rgba(0, 255, 159, 0.1) 0%, rgba(26, 10, 10, 0.8) 100%);
-      border-top: 3px solid var(--neon-green);
-      text-align: center;
-    }
-    
-    .merch-button {
-      display: inline-block;
-      margin-top: 2rem;
-      padding: 1.5rem 3rem;
-      background: var(--neon-green);
-      color: var(--dark-bg);
-      text-decoration: none;
-      font-size: 1.3rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      border: 3px solid var(--neon-yellow);
-      box-shadow: 
-        0 0 20px var(--neon-green),
-        0 5px 15px rgba(0,0,0,0.3);
-      transition: all 0.3s ease;
-    }
-    
-    .merch-button:hover {
-      background: var(--neon-yellow);
-      border-color: var(--neon-green);
-      transform: translateY(-3px);
-      box-shadow: 
-        0 0 30px var(--neon-yellow),
-        0 8px 20px rgba(0,0,0,0.4);
-    }
-    
+    .grid-3{display:grid;grid-template-columns:1fr;gap:18px}
+    @media(min-width:960px){.grid-3{grid-template-columns:repeat(3,1fr)}}
+    .hours dl{display:grid;grid-template-columns:auto 1fr;gap:8px 12px;margin:0}
+    .hours dt{color:var(--muted)}
+    .map{border-radius:var(--radius);border:1px solid var(--border);overflow:hidden}
+
+    /* Gallery (simple carousel) */
+    .carousel{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
+    .carousel img{width:100%;height:420px;object-fit:cover}
+    .carousel .dots{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:8px}
+    .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.35);border:1px solid var(--border);cursor:pointer}
+    .dot.active{background:var(--accent)}
+
+    /* Merch */
+    .merch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+    .merch-card{border:1px solid var(--border);border-radius:var(--radius);background:var(--card);overflow:hidden}
+    .merch-card .img{background:linear-gradient(135deg, rgba(255,90,61,.18), rgba(35,243,163,.18));aspect-ratio:4/3;display:grid;place-items:center;color:var(--muted);font-weight:700}
+    .merch-card .bd{padding:14px}
+    .price{color:var(--accent-2);font-weight:800}
+
     /* Footer */
-    footer {
-      background: var(--dark-bg);
-      padding: 3rem 2rem;
-      text-align: center;
-      border-top: 3px solid var(--neon-red);
+    footer{border-top:1px solid var(--border);background:var(--bg-soft);padding:36px 0;margin-top:16px}
+    .foot{display:grid;gap:10px;justify-items:center;color:var(--muted);font-size:14px}
+    .social{display:flex;gap:16px}
+    .pill{border:1px solid var(--border);padding:8px 12px;border-radius:999px;color:var(--text);opacity:.9}
+    .pill:hover{opacity:1}
+
+    /* Subtle neon headline accent */
+    .glow{ text-shadow:0 0 8px rgba(255,216,107,.35), 0 0 18px rgba(35,243,163,.15); }
+
+    /* Instagram Carousel */
+    .instagram-carousel {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--card);
     }
-    
-    .social-links {
+    .instagram-container {
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+    }
+    .instagram-track {
       display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-bottom: 2rem;
+      transition: transform 0.4s ease;
+      gap: 2px;
     }
-    
-    .social-links a {
-      color: var(--light-cream);
-      font-size: 2rem;
-      transition: all 0.3s ease;
-      text-decoration: none;
+    .ig-post {
+      flex: 0 0 calc(25% - 1.5px);
+      aspect-ratio: 1;
+      background: var(--bg-soft);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s ease;
     }
-    
-    .social-links a:hover {
-      color: var(--neon-green);
-      text-shadow: 0 0 15px var(--neon-green);
-      transform: scale(1.2);
+    .ig-post:hover {
+      transform: scale(0.97);
     }
-    
-    footer p {
-      color: var(--light-cream);
-      font-size: 0.9rem;
+    .ig-post img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .ig-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.7));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 12px;
+      color: white;
+      font-size: 13px;
+    }
+    .ig-post:hover .ig-overlay {
+      opacity: 1;
+    }
+    .ig-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(27,17,17,0.9);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.2s ease;
       opacity: 0.7;
     }
-    
-    /* Scroll Down Indicator */
-    .scroll-indicator {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      color: var(--neon-green);
-      font-size: 2rem;
-      animation: bounce 2s infinite;
-      text-shadow: 0 0 10px var(--neon-green);
+    .ig-nav:hover {
+      opacity: 1;
+      background: var(--accent);
+      color: var(--bg);
+    }
+    .ig-prev { left: 16px; }
+    .ig-next { right: 16px; }
+    .ig-placeholder {
+      padding: 60px 20px;
+      text-align: center;
+      color: var(--muted);
+      width: 100%;
     }
     
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateX(-50%) translateY(0);
-      }
-      40% {
-        transform: translateX(-50%) translateY(-10px);
-      }
-      60% {
-        transform: translateX(-50%) translateY(-5px);
-      }
+    /* Responsive Instagram Grid */
+    @media(max-width: 960px) {
+      .ig-post { flex: 0 0 calc(33.333% - 1.33px); }
     }
-    
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
-      nav ul {
-        gap: 1rem;
-      }
-      
-      nav a {
-        font-size: 0.8rem;
-      }
-      
-      section {
-        padding: 3rem 1.5rem;
-      }
-      
-      .info-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
+    @media(max-width: 640px) {
+      .ig-post { flex: 0 0 calc(50% - 1px); }
+      .ig-nav { opacity: 1; width: 36px; height: 36px; font-size: 20px; }
     }
   </style>
 </head>
 <body>
-  
-  <!-- Navigation -->
-  <nav>
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#location">Location</a></li>
-      <li><a href="#merch">Merch</a></li>
-    </ul>
-  </nav>
-  
-  <!-- Hero Section -->
-  <section id="home" class="hero">
-    <div class="hero-content">
-      <h1>Sully's Marina Lounge</h1>
-      <p class="tagline">Hark! Cocktails</p>
-      <a href="#location" class="cta-button">Visit Us</a>
+
+  <!-- Nav -->
+  <header class="nav">
+    <div class="container inner">
+      <div class="brand">
+        Sully's Marina Lounge
+        <span class="tiny">Hark! Cocktails — Marina District</span>
+      </div>
+      <nav class="links">
+        <a href="#about">About</a>
+        <a href="#merch" class="shop-btn">Shop</a>
+        <a href="#hours">Hours</a>
+        <a href="#location">Location</a>
+        <a href="#gallery">Photos</a>
+        <a href="#instagram">Instagram</a>
+      </nav>
+      <a class="button" href="tel:+14159221475">Call (415) 922‑1475</a>
     </div>
-    <div class="scroll-indicator">↓</div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home" aria-label="Hero">
+    <div class="hero-media" aria-hidden="true"></div>
+    <div class="container">
+      <div class="panel">
+        <span class="tag">Neighborhood Dive • Since 1937</span>
+        <h1 class="glow">Sully's Marina Lounge</h1>
+        <p class="lede">Strong pours, good people, jukebox nights. No frills — just the Marina’s favorite room to unwind.</p>
+        <a class="cta" href="#hours">Hours & Directions →</a>
+      </div>
+    </div>
   </section>
-  
-  <!-- About Section -->
-  <section id="about" class="about">
-    <h2>Your Neighborhood Dive</h2>
-    <p>
-      Since [YEAR], Sully's Marina Lounge has been the Marina District's favorite watering hole. With our iconic neon sign lighting up Chestnut Street, we've served generations of San Franciscans looking for cold drinks, good company, and zero pretense.
-    </p>
-    <p>
-      This is where neighbors become friends, where stories are told over whiskey, and where the jukebox never stops. We're not fancy—we're authentic. And that's exactly how we like it.
-    </p>
-    <p>
-      Come for the drinks. Stay for the atmosphere. Leave as family.
-    </p>
+
+  <!-- About -->
+  <section id="about" aria-labelledby="about-title">
+    <div class="container row">
+      <div class="stack">
+        <h2 id="about-title">Built for regulars. Welcoming to newcomers.</h2>
+        <p class="sub">Nearly 90 years after opening in honor of a Navy pilot, Sully’s is still a place where neighbors become friends and stories travel across the bar.</p>
+        <div class="card">
+          <ul style="margin:0;padding-left:18px">
+            <li>Happy Hour Mon–Fri • 4–6pm</li>
+            <li>Weekend games on the big screen</li>
+            <li>Occasional late‑night kitchen pop‑ups</li>
+          </ul>
+        </div>
+      </div>
+      <div class="about-img">
+        <img src="10540223843_efb971dc91_o.jpg" alt="Sully's Marina Lounge neon sign on Chestnut Street" loading="lazy">
+      </div>
+    </div>
   </section>
-  
-  <!-- Location & Hours -->
-  <section id="location" class="location">
-    <h2>Find Us</h2>
-    
-    <div class="info-grid">
-      <div class="info-box">
-        <h3>Hours</h3>
-        <p><strong>Every Day:</strong></p>
-        <p>12:00 PM – 2:00 AM</p>
+
+  <!-- Merch -->
+  <section id="merch" aria-labelledby="merch-title">
+    <div class="container">
+      <h2 id="merch-title">Rep Your Local</h2>
+      <p class="sub">Order online, pick up at the bar. Ask your bartender about sizes.</p>
+      <div class="merch-grid">
+        <article class="merch-card">
+          <div class="img">Upload: merch-tee.jpg</div>
+          <div class="bd">
+            <h3 style="margin:0 0 4px">Classic T‑Shirt</h3>
+            <div class="price">$30</div>
+            <a class="cta" style="margin-top:10px;text-decoration:none" href="#" target="_blank" rel="noopener">Order →</a>
+          </div>
+        </article>
+        <article class="merch-card">
+          <div class="img">Upload: merch-hat.jpg</div>
+          <div class="bd">
+            <h3 style="margin:0 0 4px">Snapback</h3>
+            <div class="price">$32</div>
+            <a class="cta" style="margin-top:10px;text-decoration:none" href="#" target="_blank" rel="noopener">Order →</a>
+          </div>
+        </article>
+        <article class="merch-card">
+          <div class="img">Upload: merch-glass.jpg</div>
+          <div class="bd">
+            <h3 style="margin:0 0 4px">Pint Glass</h3>
+            <div class="price">$12</div>
+            <a class="cta" style="margin-top:10px;text-decoration:none" href="#" target="_blank" rel="noopener">Order →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hours & Location -->
+  <section id="hours" aria-labelledby="hours-title">
+    <div class="container">
+      <h2 id="hours-title">Hours & Location</h2>
+      <p class="sub">Open daily • 12:00 PM – 2:00 AM</p>
+      <div class="grid-3">
+        <div class="card hours" aria-labelledby="h-hours">
+          <h3 id="h-hours" style="margin:0 0 10px">Hours</h3>
+          <dl>
+            <dt>Mon–Thu</dt><dd>12:00 PM – 2:00 AM</dd>
+            <dt>Fri–Sat</dt><dd>12:00 PM – 2:00 AM</dd>
+            <dt>Sun</dt><dd>12:00 PM – 2:00 AM</dd>
+          </dl>
+        </div>
+        <div class="card" aria-labelledby="h-address">
+          <h3 id="h-address" style="margin:0 0 10px">Address</h3>
+          <p style="margin:0">2138 Chestnut Street<br>San Francisco, CA 94123<br><em>Marina District</em></p>
+          <p style="margin:.6rem 0 0"><a href="https://maps.google.com/?q=2138+Chestnut+Street+San+Francisco+CA+94123" target="_blank" rel="noopener">Open in Google Maps →</a></p>
+        </div>
+        <div class="card" aria-labelledby="h-contact">
+          <h3 id="h-contact" style="margin:0 0 10px">Contact</h3>
+          <p style="margin:0"><strong>Phone:</strong> <a href="tel:+14159221475">(415) 922‑1475</a></p>
+          <p style="margin:.4rem 0 0"><strong>Email:</strong> <a href="mailto:info@sullysmarinalounge.com">info@sullysmarinalounge.com</a></p>
+        </div>
+      </div>
+
+      <div class="card map" style="margin-top:18px">
+        <iframe title="Map to Sully's Marina Lounge"
+          src="https://www.google.com/maps?q=2138+Chestnut+Street+San+Francisco+CA+94123&output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="width:100%;height:420px;border:0"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" aria-labelledby="photos-title">
+    <div class="container">
+      <h2 id="photos-title">Photos</h2>
+      <div class="carousel" id="carousel">
+        <img src="IMG_5054.jpg" alt="Sully's at night, glowing neon" loading="lazy">
+        <div class="dots" role="tablist" aria-label="Gallery slides">
+          <button class="dot active" aria-label="Slide 1" aria-controls="carousel"></button>
+          <button class="dot" aria-label="Slide 2" aria-controls="carousel"></button>
+          <button class="dot" aria-label="Slide 3" aria-controls="carousel"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instagram Feed -->
+  <section id="instagram" aria-labelledby="instagram-title">
+    <div class="container">
+      <h2 id="instagram-title">@sullysmarinalounge</h2>
+      <p class="sub">The latest from the bar</p>
+      
+      <!-- Instagram Feed Widget -->
+      <div id="instagram-feed" class="instagram-carousel">
+        <div class="instagram-container">
+          <div class="instagram-track" id="ig-track">
+            <!-- Instagram posts will be loaded here -->
+            <div class="ig-placeholder">Loading Instagram feed...</div>
+          </div>
+          <button class="ig-nav ig-prev" id="ig-prev" aria-label="Previous posts">‹</button>
+          <button class="ig-nav ig-next" id="ig-next" aria-label="Next posts">›</button>
+        </div>
       </div>
       
-      <div class="info-box">
-        <h3>Location</h3>
-        <p>2138 Chestnut Street</p>
-        <p>San Francisco, CA 94123</p>
-        <p>The Marina District</p>
-        <p><a href="https://maps.google.com/?q=2138+Chestnut+Street+San+Francisco+CA+94123" target="_blank">Get Directions →</a></p>
-      </div>
-      
-      <div class="info-box">
-        <h3>Contact</h3>
-        <p><strong>Phone:</strong> <a href="tel:+14155551234">(415) 555-1234</a></p>
-        <p><strong>Email:</strong> <a href="mailto:hello@sullysmarinaluounge.com">hello@sullysmarinaluounge.com</a></p>
+      <div style="text-align:center;margin-top:24px">
+        <a class="cta" href="https://www.instagram.com/sullysmarinalounge/" target="_blank" rel="noopener">Follow on Instagram →</a>
       </div>
     </div>
-    
-    <div class="map-container">
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3152.2977893229234!2d-122.44186368468184!3d37.79930797975743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808580e8c8a8f8f7%3A0x1234567890abcdef!2s2138%20Chestnut%20St%2C%20San%20Francisco%2C%20CA%2094123!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" 
-        allowfullscreen="" 
-        loading="lazy">
-      </iframe>
-    </div>
   </section>
-  
-  <!-- Merch Section -->
-  <section id="merch" class="merch">
-    <h2>Sully's Swag</h2>
-    <p>
-      Rep your favorite dive bar. T-shirts, hats, pint glasses, and more. 
-      All featuring that iconic neon sign you know and love.
-    </p>
-    <!-- TODO: Replace with actual Shopify store URL -->
-    <a href="https://your-shopify-store.com" target="_blank" class="merch-button">Shop Merch</a>
-  </section>
-  
-  <!-- Footer -->
+
   <footer>
-    <div class="social-links">
-      <!-- TODO: Replace # with actual social media URLs -->
-      <a href="#" target="_blank" title="Instagram">📷</a>
-      <a href="#" target="_blank" title="Facebook">👍</a>
-      <a href="#" target="_blank" title="Twitter">🐦</a>
+    <div class="container foot">
+      <div class="social">
+        <a class="pill" href="https://www.instagram.com/sullysmarinalounge/" target="_blank" rel="noopener">Instagram</a>
+        <a class="pill" href="tel:+14159221475">Call</a>
+        <a class="pill" href="#hours">Hours</a>
+      </div>
+      <div>© <span id="y"></span> Sully's Marina Lounge • 2138 Chestnut St, San Francisco, CA</div>
     </div>
-    <p>&copy; 2025 Sully's Marina Lounge. All rights reserved.</p>
-    <p>2138 Chestnut Street, San Francisco, CA 94123</p>
   </footer>
-  
+
   <script>
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Simple 3-image rotator for #carousel (replace sources as you add photos)
+    const imgs = ["IMG_5054.jpg", "10540223843_efb971dc91_o.jpg", "placeholder3.jpg"];
+    const alt  = ["Sully's at night, glowing neon", "Neon sign on Chestnut Street", "Inside the bar"];
+    const carousel = document.querySelector("#carousel img");
+    const dots = document.querySelectorAll(".dot");
+    let idx = 0;
+    function setSlide(i){
+      idx = (i + imgs.length) % imgs.length;
+      carousel.src = imgs[idx];
+      carousel.alt = alt[idx];
+      dots.forEach((d,k)=>d.classList.toggle("active", k===idx));
+    }
+    dots.forEach((d,k)=>d.addEventListener("click", ()=>setSlide(k)));
+    setInterval(()=>setSlide(idx+1), 5000);
+
+    // Instagram Feed Carousel
+    // Using Curator.io's embed service (free tier available)
+    // Sign up at curator.io, connect @sullysmarinalounge, and get your feed ID
+    
+    // Option 1: Curator.io Widget (Recommended - easiest setup)
+    // Replace 'YOUR-FEED-ID' with your actual Curator feed ID
+    const curatorFeedId = 'YOUR-FEED-ID'; // Get this from curator.io after setup
+    
+    // This creates a simple embedded widget
+    const igFeedContainer = document.getElementById('ig-track');
+    if (igFeedContainer) {
+      igFeedContainer.innerHTML = `
+        <!-- Curator.io Widget -->
+        <div id="curator-feed-default-feed-layout">
+          <a href="https://curator.io" target="_blank" class="crt-logo crt-tag">Powered by Curator.io</a>
+        </div>
+        <script type="text/javascript">
+        /* curator-feed-default-feed-layout */
+        (function(){
+        var i,e,d=document,s="script";i=d.createElement("script");i.async=1;i.charset="UTF-8";
+        i.src="https://cdn.curator.io/published/${curatorFeedId}.js";
+        e=d.getElementsByTagName(s)[0];e.parentNode.insertBefore(i, e);
+        })();
+        <\/script>
+      `;
+    }
+
+    // Option 2: Manual Instagram Display (Fallback with sample data)
+    // This is what it will look like with real posts
+    // You'll need to implement Instagram Basic Display API on your server
+    
+    function loadInstagramFallback() {
+      const track = document.getElementById('ig-track');
+      
+      // Sample post data - replace with actual Instagram API call
+      const samplePosts = [
+        { id: 1, image: 'IMG_5054.jpg', caption: 'Friday night vibes at Sully\'s', link: 'https://www.instagram.com/p/SAMPLE1/' },
+        { id: 2, image: '10540223843_efb971dc91_o.jpg', caption: 'Classic Sully\'s neon', link: 'https://www.instagram.com/p/SAMPLE2/' },
+        { id: 3, image: 'IMG_5054.jpg', caption: 'Happy Hour deals', link: 'https://www.instagram.com/p/SAMPLE3/' },
+        { id: 4, image: '10540223843_efb971dc91_o.jpg', caption: 'Weekend crowd', link: 'https://www.instagram.com/p/SAMPLE4/' },
+        { id: 5, image: 'IMG_5054.jpg', caption: 'Jukebox classics all night', link: 'https://www.instagram.com/p/SAMPLE5/' },
+        { id: 6, image: '10540223843_efb971dc91_o.jpg', caption: 'Your neighborhood dive', link: 'https://www.instagram.com/p/SAMPLE6/' },
+        { id: 7, image: 'IMG_5054.jpg', caption: 'Strong pours, good times', link: 'https://www.instagram.com/p/SAMPLE7/' },
+        { id: 8, image: '10540223843_efb971dc91_o.jpg', caption: 'Marina nights', link: 'https://www.instagram.com/p/SAMPLE8/' }
+      ];
+      
+      // Clear placeholder and build grid
+      track.innerHTML = '';
+      
+      samplePosts.forEach(post => {
+        const postEl = document.createElement('a');
+        postEl.className = 'ig-post';
+        postEl.href = post.link;
+        postEl.target = '_blank';
+        postEl.rel = 'noopener';
+        postEl.innerHTML = `
+          <img src="${post.image}" alt="${post.caption}" loading="lazy">
+          <div class="ig-overlay">
+            <span>${post.caption}</span>
+          </div>
+        `;
+        track.appendChild(postEl);
+      });
+      
+      // Carousel functionality
+      let currentOffset = 0;
+      const postsPerView = window.innerWidth <= 640 ? 2 : (window.innerWidth <= 960 ? 3 : 4);
+      const maxOffset = Math.max(0, samplePosts.length - postsPerView);
+      
+      function updateCarousel() {
+        const percentage = -(currentOffset / postsPerView) * 100;
+        track.style.transform = `translateX(${percentage}%)`;
+      }
+      
+      document.getElementById('ig-prev')?.addEventListener('click', () => {
+        currentOffset = Math.max(0, currentOffset - postsPerView);
+        updateCarousel();
+      });
+      
+      document.getElementById('ig-next')?.addEventListener('click', () => {
+        currentOffset = Math.min(maxOffset, currentOffset + postsPerView);
+        updateCarousel();
+      });
+      
+      // Update on resize
+      window.addEventListener('resize', () => {
+        const newPostsPerView = window.innerWidth <= 640 ? 2 : (window.innerWidth <= 960 ? 3 : 4);
+        if (newPostsPerView !== postsPerView) {
+          location.reload(); // Simple reload for responsive changes
         }
       });
-    });
+    }
+    
+    // If Curator.io widget doesn't load, use fallback
+    setTimeout(() => {
+      if (curatorFeedId === 'YOUR-FEED-ID') {
+        loadInstagramFallback();
+      }
+    }, 1000);
   </script>
 </body>
 </html>
