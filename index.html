@@ -282,6 +282,11 @@
   <!-- Merch -->
   <section id="merch" aria-labelledby="merch-title">
     <div class="container">
+      <div style="background:#ff5a3d;padding:24px;border-radius:var(--radius);text-align:center;margin-bottom:28px">
+        <h3 style="margin:0;color:white;font-size:20px;font-weight:800">🎉 Store Coming Soon</h3>
+        <p style="margin:8px 0 0;color:rgba(255,255,255,0.9)">Shop Sully's merch & exclusive gear</p>
+      </div>
+      
       <h2 id="merch-title">Rep Your Local</h2>
       <p class="sub">Order online, pick up at the bar.</p>
       <div class="merch-grid">
@@ -366,15 +371,10 @@
       <h2 id="instagram-title">@sullysmarinalounge</h2>
       <p class="sub">The latest from the bar</p>
       
-      <!-- Instagram Feed Widget -->
-      <div id="instagram-feed" class="instagram-carousel">
-        <div class="instagram-container">
-          <div class="instagram-track" id="ig-track">
-            <!-- Instagram posts will be loaded here -->
-            <div class="ig-placeholder">Loading Instagram feed...</div>
-          </div>
-          <button class="ig-nav ig-prev" id="ig-prev" aria-label="Previous posts">‹</button>
-          <button class="ig-nav ig-next" id="ig-next" aria-label="Next posts">›</button>
+      <!-- Native Instagram Embed -->
+      <div id="instagram-feed" style="display:flex;justify-content:center;margin-top:28px">
+        <div style="max-width:540px;width:100%">
+          <iframe src="https://www.instagram.com/sullysmarinalounge/embed" width="100%" height="600" frameborder="0" scrolling="no" allowtransparency="true" loading="lazy" style="border-radius:var(--radius)"></iframe>
         </div>
       </div>
       
@@ -414,105 +414,8 @@
     dots.forEach((d,k)=>d.addEventListener("click", ()=>setSlide(k)));
     setInterval(()=>setSlide(idx+1), 5000);
 
-    // Instagram Feed Carousel
-    // Using Curator.io's embed service (free tier available)
-    // Sign up at curator.io, connect @sullysmarinalounge, and get your feed ID
-    
-    // Option 1: Curator.io Widget (Recommended - easiest setup)
-    // Replace 'YOUR-FEED-ID' with your actual Curator feed ID
-    const curatorFeedId = 'YOUR-FEED-ID'; // Get this from curator.io after setup
-    
-    // This creates a simple embedded widget
-    const igFeedContainer = document.getElementById('ig-track');
-    if (igFeedContainer) {
-      igFeedContainer.innerHTML = `
-        <!-- Curator.io Widget -->
-        <div id="curator-feed-default-feed-layout">
-          <a href="https://curator.io" target="_blank" class="crt-logo crt-tag">Powered by Curator.io</a>
-        </div>
-        <script type="text/javascript">
-        /* curator-feed-default-feed-layout */
-        (function(){
-        var i,e,d=document,s="script";i=d.createElement("script");i.async=1;i.charset="UTF-8";
-        i.src="https://cdn.curator.io/published/${curatorFeedId}.js";
-        e=d.getElementsByTagName(s)[0];e.parentNode.insertBefore(i, e);
-        })();
-        <\/script>
-      `;
-    }
-
-    // Option 2: Manual Instagram Display (Fallback with sample data)
-    // This is what it will look like with real posts
-    // You'll need to implement Instagram Basic Display API on your server
-    
-    function loadInstagramFallback() {
-      const track = document.getElementById('ig-track');
-      
-      // Sample post data - replace with actual Instagram API call
-      const samplePosts = [
-        { id: 1, image: 'IMG_5054.jpg', caption: 'Friday night vibes at Sully\'s', link: 'https://www.instagram.com/p/SAMPLE1/' },
-        { id: 2, image: '10540223843_efb971dc91_o.jpg', caption: 'Classic Sully\'s neon', link: 'https://www.instagram.com/p/SAMPLE2/' },
-        { id: 3, image: 'IMG_5054.jpg', caption: 'Happy Hour deals', link: 'https://www.instagram.com/p/SAMPLE3/' },
-        { id: 4, image: '10540223843_efb971dc91_o.jpg', caption: 'Weekend crowd', link: 'https://www.instagram.com/p/SAMPLE4/' },
-        { id: 5, image: 'IMG_5054.jpg', caption: 'Jukebox classics all night', link: 'https://www.instagram.com/p/SAMPLE5/' },
-        { id: 6, image: '10540223843_efb971dc91_o.jpg', caption: 'Your neighborhood dive', link: 'https://www.instagram.com/p/SAMPLE6/' },
-        { id: 7, image: 'IMG_5054.jpg', caption: 'Strong pours, good times', link: 'https://www.instagram.com/p/SAMPLE7/' },
-        { id: 8, image: '10540223843_efb971dc91_o.jpg', caption: 'Marina nights', link: 'https://www.instagram.com/p/SAMPLE8/' }
-      ];
-      
-      // Clear placeholder and build grid
-      track.innerHTML = '';
-      
-      samplePosts.forEach(post => {
-        const postEl = document.createElement('a');
-        postEl.className = 'ig-post';
-        postEl.href = post.link;
-        postEl.target = '_blank';
-        postEl.rel = 'noopener';
-        postEl.innerHTML = `
-          <img src="${post.image}" alt="${post.caption}" loading="lazy">
-          <div class="ig-overlay">
-            <span>${post.caption}</span>
-          </div>
-        `;
-        track.appendChild(postEl);
-      });
-      
-      // Carousel functionality
-      let currentOffset = 0;
-      const postsPerView = window.innerWidth <= 640 ? 2 : (window.innerWidth <= 960 ? 3 : 4);
-      const maxOffset = Math.max(0, samplePosts.length - postsPerView);
-      
-      function updateCarousel() {
-        const percentage = -(currentOffset / postsPerView) * 100;
-        track.style.transform = `translateX(${percentage}%)`;
-      }
-      
-      document.getElementById('ig-prev')?.addEventListener('click', () => {
-        currentOffset = Math.max(0, currentOffset - postsPerView);
-        updateCarousel();
-      });
-      
-      document.getElementById('ig-next')?.addEventListener('click', () => {
-        currentOffset = Math.min(maxOffset, currentOffset + postsPerView);
-        updateCarousel();
-      });
-      
-      // Update on resize
-      window.addEventListener('resize', () => {
-        const newPostsPerView = window.innerWidth <= 640 ? 2 : (window.innerWidth <= 960 ? 3 : 4);
-        if (newPostsPerView !== postsPerView) {
-          location.reload(); // Simple reload for responsive changes
-        }
-      });
-    }
-    
-    // If Curator.io widget doesn't load, use fallback
-    setTimeout(() => {
-      if (curatorFeedId === 'YOUR-FEED-ID') {
-        loadInstagramFallback();
-      }
-    }, 1000);
+    // Instagram feed will auto-load via native embed
+    // No additional setup needed!
   </script>
 </body>
 </html>
